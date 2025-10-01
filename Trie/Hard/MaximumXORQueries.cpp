@@ -20,10 +20,10 @@ using namespace std;
 
 // Define a node structure for a trie,
 // which contains links to child nodes.
-struct Node {
+struct TrieNode {
     // Array to hold links
     // to child nodes (0 and 1)
-    Node *links[2];
+    TrieNode *links[2];
 
     // Function to check if a child node
     // exists at a given index (0 or 1)
@@ -33,13 +33,13 @@ struct Node {
 
     // Function to get the child
     // node at a given index (0 or 1)
-    Node* get(int ind) {
+    TrieNode* get(int ind) {
         return links[ind];
     }
 
     // Function to set the child
     // node at a given index (0 or 1)
-    void put(int ind, Node* node) {
+    void put(int ind, TrieNode* node) {
         links[ind] = node;
     }
 };
@@ -50,13 +50,13 @@ class Trie {
 private:
     // Pointer to the root
     // node of the trie
-    Node* root;
+    TrieNode* root;
 
 public:
     // Constructor to initialize the
     // trie with an empty root node
     Trie() {
-        root = new Node();
+        root = new TrieNode();
     }
 
 public:
@@ -65,7 +65,7 @@ public:
     void insert(int num) {
         // Start traversal
         // from the root node
-        Node* node = root;
+        TrieNode* node = root;
 
         // Traverse each bit of the number
         // from the most significant bit
@@ -79,7 +79,7 @@ public:
             // have a child node at the
             // current bit, create one
             if(!node->containsKey(bit)) {
-                node->put(bit, new Node());
+                node->put(bit, new TrieNode());
             }
 
             // Move to the child node
@@ -93,7 +93,7 @@ public:
     // value achievable with a given number
     int findMax(int num) {
         // Start traversal from the root node
-        Node* node = root;
+        TrieNode* node = root;
 
         // Initialize the maximum XOR value
         int maxNum = 0;

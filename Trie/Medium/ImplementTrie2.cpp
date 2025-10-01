@@ -4,17 +4,11 @@ Insert (word): To insert a string `word` in the Trie.
 Count Words Equal To (word): Return the count of occurrences of the string word in the Trie.
 Count Words Starting With (prefix): Return the count of words in the Trie that have the string “prefix” as a prefix.
 Erase (word): Delete one occurrence of the string word from the Trie.
-Note:
 
+Note:
 The Erase(word) function is guaranteed to be called only when a word is present in the Trie.
 Release the memory associated with variables using dynamic memory allocation at the end of your solution.
 
-//Solution
-Time Complexity: O(N) where N is the length of the word or prefix being processed.
-
-Each method (insertion, counting words equal to a given word, counting words starting with a prefix, and erasing a word) requires traversing the Trie for each character of the input word or prefix.
-Therefore, the time complexity is linear with respect to the length of the word or prefix being processed.
-Space Complexity: O(N) where N is the total characters across all words inserted into the Trie. The space complexity is proportional to the number of unique words inserted into the Trie and the average length of those words.
 
 #include <bits/stdc++.h>
 
@@ -22,10 +16,10 @@ using namespace std;
 
 // Define a struct for
 // each node in the trie
-struct Node {
+struct TrieNode {
      // Array to store
      // links to child nodes
-    Node* links[26];
+    TrieNode* links[26];
      // Counter for number of
      // words that end at this node
     int cntEndWith = 0;
@@ -43,7 +37,7 @@ struct Node {
 
     // Function to get the child
     // node corresponding to a key
-    Node* get(char ch) {
+    TrieNode* get(char ch) {
         // Return the link
         // corresponding to the character
         return links[ch - 'a'];
@@ -51,7 +45,7 @@ struct Node {
 
     // Function to insert a child
     // node with a specific key
-    void put(char ch, Node* node) {
+    void put(char ch, TrieNode* node) {
          // Set the link corresponding to
          // the character to the provided node
         links[ch - 'a'] = node;
@@ -92,21 +86,21 @@ class Trie {
 private:
     // Pointer to the
     // root node of the trie
-    Node* root;
+    TrieNode* root;
 
 public:
     // Constructor to initialize
     // the trie with an empty root node
     Trie() {
         // Create a new root node
-        root = new Node();
+        root = new TrieNode();
     }
 
     // Function to insert
     // a word into the trie
     void insert(string word) {
         // Start from the root node
-        Node* node = root;
+        TrieNode* node = root;
         // Iterate over each
         // character in the word
         for (int i = 0; i < word.size(); i++) {
@@ -115,7 +109,7 @@ public:
             if (!node->containsKey(word[i])) {
                 // Create a new node
                 // for the character
-                node->put(word[i], new Node());
+                node->put(word[i], new TrieNode());
             }
              // Move to the child node
              // corresponding to the character
@@ -133,7 +127,7 @@ public:
     // of words equal to a given word
     int countWordsEqualTo(string word) {
          // Start from the root node
-        Node* node = root;
+        TrieNode* node = root;
         // Iterate over each character in the word
         for (int i = 0; i < word.size(); i++) {
             // If the character is found in the trie
@@ -156,7 +150,7 @@ public:
     // words starting with a given prefix
     int countWordsStartingWith(string word) {
          // Start from the root node
-        Node* node = root;
+        TrieNode* node = root;
         // Iterate over each character in the prefix
         for (int i = 0; i < word.size(); i++) {
             // If the character is found in the trie
@@ -179,7 +173,7 @@ public:
     // word from the trie
     void erase(string word) {
          // Start from the root node
-        Node* node = root;
+        TrieNode* node = root;
         // Iterate over each
         // character in the word
         for (int i = 0; i < word.size(); i++) {
@@ -203,3 +197,22 @@ public:
         node->deleteEnd();
     }
 };
+
+
+int main() {
+    Trie trie;
+    trie.insert("apple");
+    trie.insert("app");
+    cout << "Inserting strings 'apple', 'app' into Trie"<< endl;
+    cout << "Count Words Equal to 'apple': ";
+    cout << trie.countWordsEqualTo("apple") << endl;
+    cout << "Count Words Starting With 'app': ";
+    cout << trie.countWordsStartingWith("app") << endl;
+    cout << "Erasing word 'app' from trie"<< endl;
+    trie.erase("app");
+    cout << "Count Words Equal to 'apple': ";
+    cout << trie.countWordsEqualTo("apple") << endl;
+    cout << "Count Words Starting With 'apple': ";
+    cout << trie.countWordsStartingWith("app") << endl;
+    return 0;
+}

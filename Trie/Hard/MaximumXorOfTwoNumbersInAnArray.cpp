@@ -14,12 +14,12 @@ Space Complexity: O(32N) where N is the length of the input array. This algorith
 
 using namespace std;
 
-// Node structure
+// TrieNode structure
 // for the Trie
-struct Node {
+struct TrieNode {
     // Array to store links
     // to child nodes (0 and 1)
-    Node* links[2];
+    TrieNode* links[2];
 
     // Method to check if a specific
     // bit key is present in the child nodes
@@ -32,7 +32,7 @@ struct Node {
 
     // Method to get the child node
     // corresponding to a specific bit
-    Node* get(int bit) {
+    TrieNode* get(int bit) {
 
         // Returns the child
         // node at index 'bit'
@@ -41,7 +41,7 @@ struct Node {
 
     // Method to set a child node at a
     // specific index in the links array
-    void put(int bit, Node* node) {
+    void put(int bit, TrieNode* node) {
 
         // Sets the child node at index
         // 'bit' to the provided node
@@ -53,20 +53,20 @@ struct Node {
 class Trie {
 private:
     // Root node of the Trie
-    Node* root;
+    TrieNode* root;
 public:
     // Constructor to initialize
     // the Trie with a root node
     Trie() {
          // Creates a new root
          // node for the Trie
-        root = new Node();
+        root = new TrieNode();
     }
 
     // Method to insert a number into the Trie
     void insert(int num) {
         // Start from the root node
-        Node* node = root;
+        TrieNode* node = root;
         // Iterate through each bit of the
         // number (from left to right)
         for (int i = 31; i >= 0; i--) {
@@ -79,7 +79,7 @@ public:
 
                 // Create a new child node
                 // with the current bit
-                node->put(bit, new Node());
+                node->put(bit, new TrieNode());
             }
 
             // Move to the child node
@@ -92,7 +92,7 @@ public:
     // XOR value for a given number
     int getMax(int num) {
          // Start from the root node
-        Node* node = root;
+        TrieNode* node = root;
 
         // Initialize the maximum XOR value
         int maxNum = 0;
