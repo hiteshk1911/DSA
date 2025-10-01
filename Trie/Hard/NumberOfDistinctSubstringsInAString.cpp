@@ -57,10 +57,10 @@ Space Complexity : O(N*N) where N is the length of the input string. In the wors
 #include <string>
 using namespace std;
 
-// Node structure representing
+// TrieNode structure representing
 // each node in the trie
-struct Node {
-    Node* links[26];
+struct TrieNode {
+    TrieNode* links[26];
     // Array of pointers to child nodes,
     // each corresponding to a letter
     // of the alphabet
@@ -78,7 +78,7 @@ struct Node {
 
     // Method to get the child node corresponding
     // to a specific character key
-    Node* get(char ch) {
+    TrieNode* get(char ch) {
         // Get the child node
         // corresponding to character 'ch'
         return links[ch - 'a'];
@@ -86,7 +86,7 @@ struct Node {
 
     // Method to insert a new child
     // node with a specific character key
-    void put(char ch, Node* node) {
+    void put(char ch, TrieNode* node) {
         // Insert a new child
         // node for character 'ch'
         links[ch - 'a'] = node;
@@ -114,7 +114,7 @@ struct Node {
 int countDistinctSubstrings(string &s) {
     // Function to count distinct
     // substrings in the input string 's'
-    Node* root = new Node();
+    TrieNode* root = new TrieNode();
     // Creating the root
     // node of the trie
     int cnt = 0;
@@ -128,14 +128,14 @@ int countDistinctSubstrings(string &s) {
     for (int i = 0; i < n; i++) {
         // Iterate through each
         // starting position of the substring
-        Node* node = root;
+        TrieNode* node = root;
         // Start from the root for each substring
         for (int j = i; j < n; j++) {
             // Iterate through each character of the substring
             // If the current character is not a child
             // of the current node, insert it as a new child node
             if (!node->containsKey(s[j])) {
-                node->put(s[j], new Node());
+                node->put(s[j], new TrieNode());
                 // Insert a new child
                 // node for character s[j]
                 cnt++;
