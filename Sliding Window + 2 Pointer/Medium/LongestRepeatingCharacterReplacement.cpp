@@ -17,12 +17,40 @@ public:
             maxFreq = max(maxFreq, freq[s[right] - 'A']);
 
             // if window is invalid, shrink from left
+            // number of conversions needed = (window size - maxFreq)
             while ((right - left + 1) - maxFreq > k) {
                 freq[s[left] - 'A']--;
                 left++;
             }
 
             result = max(result, right - left + 1);
+        }
+        return result;
+    }
+};
+
+//Optimal Approach
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        vector<int> freq(26, 0);
+        int left = 0, maxFreq = 0, result = 0;
+
+        for (int right = 0; right < s.size(); right++) {
+            freq[s[right] - 'A']++;
+            maxFreq = max(maxFreq, freq[s[right] - 'A']);
+
+            // if window is invalid, shrink from left
+            // number of conversions needed = (window size - maxFreq)
+            if ((right - left + 1) - maxFreq > k) {
+                freq[s[left] - 'A']--;
+                left++;
+            }
+
+            if((right - left + 1) - maxFreq <= k){
+                result = max(result, right - left + 1);
+            }
+
         }
         return result;
     }
