@@ -25,6 +25,7 @@ A subarray is a contiguous part of the array.
 class Solution {
 public:
     int atMost(vector<int>& nums, int goal) {
+        //Important check : to handle negative goal
         if (goal < 0) return 0;
         int left = 0, sum = 0, count = 0;
         for (int right = 0; right < nums.size(); right++) {
