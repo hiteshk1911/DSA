@@ -1,0 +1,11 @@
+To clear the i-th bit (force it to 0, no matter what it was), we use AND with NOT of mask.
+
+🔹 Formula
+n = n & ~(1 << i);
+
+
+(1 << i) → creates a mask with only the i-th bit set.
+
+~(1 << i) → inverts the mask (all bits 1 except i-th).
+
+& with that → clears the i-th bit, keeps others unchanged.
