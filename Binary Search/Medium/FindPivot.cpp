@@ -22,3 +22,28 @@ int findPivotIndex(vector<int>& nums) {
 
         return start;
 }
+
+//better approach - also helps in case of duplicates
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int start = 0;
+        int end = nums.size() - 1;
+
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+
+            // If mid element is greater than end,
+            // the min is in the right half
+            if (nums[mid] > nums[end]) {
+                start = mid + 1;
+            }
+            // Otherwise, min is in the left half (including mid)
+            else {
+                end = mid;
+            }
+        }
+
+        return nums[start];
+    }
+};
