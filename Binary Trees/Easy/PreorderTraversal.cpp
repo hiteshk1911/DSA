@@ -156,3 +156,26 @@ int main()
 
     return 0;
 }
+
+//Iterative Solution
+
+void preOrder(Node* root){
+    if(!root){
+        return ;
+    }
+
+    stack<Node*> st;
+
+    Node* curr = root;
+    while(curr || !st.empty()){
+        if(curr){
+            cout<<curr->data<<" ";
+            st.push(curr);
+            curr = curr->left;
+        }else{
+            curr = st.top();
+            st.pop();
+            curr = curr->right;
+        }
+    }
+}
