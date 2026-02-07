@@ -175,3 +175,31 @@ void printVector(const vector<int>& vec) {
     }
     cout << endl;
 }
+
+//Iterative Solution
+
+void postOrder(Node* root){
+    if(!root){
+        return ;
+    }
+
+    stack<Node*> st;
+
+    Node* curr = root;
+    Node* lastVisited = NULL;
+    while(curr || !st.empty()){
+        if(curr){
+            st.push(curr);
+            curr = curr->left;
+        }else{
+            Node* peekNode = st.top();
+            if(peekNode->right && peekNode->right != lastVisited){
+                curr = peekNode->right;
+            }else{
+                cout<<peekNode->data<<" ";
+                lastVisited = peekNode;
+                st.pop();
+            }
+        }
+    }
+}
