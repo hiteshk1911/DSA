@@ -1,6 +1,6 @@
 Binary Tree: where each node can have at most two children nodes, known as the left child and the right child.
 
-Full Binary Tree:
+Full/Proper Binary Tree:
 A Full Binary Tree, also known as a Strict Binary Tree, adheres to the structural property where every node has either zero or two children.
 No node of this tree has just a single child, all internal nodes have exactly two children or in the case of leaf nodes, no children.
 
