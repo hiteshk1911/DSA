@@ -79,3 +79,25 @@ vector<int> inOrder(Node* root){
     return arr;
 }
 
+//Iterative Solution
+
+void inOrder(Node* root){
+    if(!root){
+        return ;
+    }
+
+    stack<Node*> st;
+
+    Node* curr = root;
+    while(curr || !st.empty()){
+        if(curr){
+            st.push(curr);
+            curr = curr->left;
+        }else{
+            curr = st.top();
+            st.pop();
+            cout << curr->data << " "; // process the node
+            curr = curr->right;
+        }
+    }
+}
